@@ -23,10 +23,10 @@ ConnectednessTable = function(FEVD, digit=2) {
   }
   CT = apply(FEVD,1:2,mean)*100 # spillover from others to one specific
   OWN = diag(diag(CT))
-  TO = colSums(CT-OWN)
-  FROM = rowSums(CT-OWN)
+  TO = colSums(CT-OWN)/sum(FEVD)
+  FROM = rowSums(CT-OWN)/sum(FEVD)
   NET = TO-FROM
-  TCI = mean(TO)
+  TCI = mean(colSums(CT-OWN))
   cTCI = TCI*k/(k-1)
   NPDC = CT-t(CT)
   NPT = rowSums(NPDC<0)
